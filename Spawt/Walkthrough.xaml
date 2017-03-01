@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+		x:Class="Spawt.Walkthrough">
+	<ContentPage.Content>
+		<StackLayout>
+			<cv:CarouselViewControl x:Name="carousel" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ShowIndicators="true" Arrows="true">
+				<cv:CarouselViewControl.ItemTemplate>
+					<DataTemplate>
+						<Image Source="{Binding Source}"></Image>
+					</DataTemplate>
+				</cv:CarouselViewControl.ItemTemplate>
+			</cv:CarouselViewControl>
+			<Button x:Name="GoHome" Text="Let's Go!" Clicked="GoHome_Clicked" IsVisible="true" TextColor="White" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

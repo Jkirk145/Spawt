@@ -8,7 +8,7 @@ namespace Spawt
 		{
 			InitializeComponent();
 
-			MainPage = new SpawtPage();
+			MainPage = new Walkthrough();
 		}
 
 		protected override void OnStart()
