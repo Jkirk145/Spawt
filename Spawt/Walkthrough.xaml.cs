@@ -14,7 +14,7 @@ namespace Spawt
 
 
 			//carousel.ItemsSource = new List<Image> { new Image { Source = "walkthrough1.png" }, new Image { Source = "walkthrough2.png" }, new Image { Source = "walkthrough3.png" }};
-			Image[] walkthroughImages = { new Image { Source = "walkthrough1.png" }, new Image { Source = "walkthrough2.png" }, new Image { Source = "walkthrough3b.png" } };
+			Image[] walkthroughImages = { new Image { Source = "Walk 1@2x.png" }, new Image { Source = "Walk 2.png" }, new Image { Source = "Walk 3.png" } };
 			carousel.ItemsSource = walkthroughImages;
 
 			//carousel.ItemTemplate = new DataTemplate(typeof(Image));
@@ -32,7 +32,7 @@ namespace Spawt
 
 		async void GoHome_Clicked(object sender, EventArgs e)
 		{
-			await Navigation.PushModalAsync(new SpawtPage());
+			await Navigation.PushModalAsync(new FirstTimeSearch());
 			return;
 		}
 
