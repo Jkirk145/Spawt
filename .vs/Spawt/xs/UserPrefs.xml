@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{9E421BB0-9B59-4FFB-BE60-0D327C2C594E}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Spawt/SpawtPage.xaml">
     <Files>
       <File FileName="iOS/LaunchScreen.storyboard" />
       <File FileName="Spawt/SpawtPage.xaml" Line="5" Column="1" />

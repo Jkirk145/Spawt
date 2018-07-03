@@ -36,6 +36,10 @@
                     <td><input type="text" name="rooms" value="" size="50"/></td>
                 </tr>
                 <tr>
+                    <td> SquareFt: </td>
+                    <td><input type="text" name="squareft" value="" size="50"/></td>
+                </tr>
+                <tr>
                     <td> Rent: </td>
                     <td><input type="text" name="rent" value="" size="50"/></td>
                 </tr>
@@ -70,6 +74,61 @@
                     <td><input type="radio" name="insurance" value="no"> NO</td>
                 </tr>
             </table>
+            <fieldset>
+                <legend>Select all Amenities Present</legend>
+                    <div>
+                        <input type="checkbox" id="hardwoodFloors" name="hardwoodFloors" value="yes">
+                        <label for="hardwoodFloors">Hardwood Floors</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="parking" name="parking" value="yes">
+                        <label for="parking">Parking</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="refrigerator" name="refrigerator" value="yes">
+                        <label for="refrigerator">Refrigerator</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="oven" name="oven" value="yes">
+                        <label for="oven">Oven</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="washerDryer" name="washerDryer" value="yes">
+                        <label for="washerDryer">Washer/Dryer</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="firePlace" name="firePlace" value="yes">
+                        <label for="firePlace">Fire Place</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="dishwasher" name="dishwasher" value="yes">
+                        <label for="dishwasher">Dishwasher</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="heat" name="heat" value="yes">
+                        <label for="heat">Heat</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="ac" name="ac" value="yes">
+                        <label for="ac">AirConditioning</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="backyard" name="backyard" value="yes">
+                        <label for="backyard">Backyard</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="fence" name="fance" value="yes">
+                        <label for="fence">Fence</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="pool" name="pool" value="yes">
+                        <label for="pool">Pool</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="wifi" name="wifi" value="yes">
+                        <label for="wifi">WiFi</label>
+                    </div>
+            </fieldset>
             <input type="submit" value="submit Listing" name="submitListingButton"/>
             <% //turn data inputted into json text and then.....(ask john what to 
             //do after that%>
