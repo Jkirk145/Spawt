@@ -12,8 +12,9 @@
         <title>Listing Form</title>
     </head>
     <body>
-        <h1>Add A Listing by Filling Out All Fields</h1>
-        <form onsubmit="return makeJson(this);" name="addListing" action="addListing.jsp" type="POST">
+        <h1>Add Listing Form</h1>
+        <h2>Add A Listing by Filling Out All Fields</h2>
+        <form onsubmit="return makeJson(this);" enctype="text/plain" name="addListing" action="deleteListing.jsp" type="POST">
              <table>
                 <tr>
                     <td> Street: </td>
@@ -176,8 +177,9 @@
                 var jsonFullListing= {
                     "Listing": jsonListAndAmen
                 };
+                var jSONListing = JSON.stringify(jsonFullListing);
                 //document.getElementById('results').innerHTML=JSON.stringify(jsonFullListing);
-                return false;
+               //return false;
             }
         </script>
     </body>
