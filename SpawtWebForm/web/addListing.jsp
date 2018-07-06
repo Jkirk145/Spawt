@@ -14,7 +14,7 @@
     <body>
         <h1>Add Listing Form</h1>
         <h2>Add A Listing by Filling Out All Fields</h2>
-        <form onsubmit="return makeJson(this);" enctype="text/plain" name="addListing" action="deleteListing.jsp" type="POST">
+        <form onsubmit="return makeJson(this);" enctype="application/json" name="addListing" action="deleteListing.jsp" type="POST">
              <table>
                 <tr>
                     <td> Street: </td>
