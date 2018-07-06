@@ -14,7 +14,7 @@
     <body>
         <h1>Add Listing Form</h1>
         <h2>Add A Listing by Filling Out All Fields</h2>
-        <form onsubmit="return makeJson(this);">
+        <form onsubmit="return makeJson(this);" action="/addListing/{listing}">
              <table>
                 <tr>
                     <td> Street: </td>
@@ -154,7 +154,7 @@
                     "WiFi":form.elements["WiFi"].value,
                 };
                 for(var key in jsonAmenities){
-                    if(!form.elements[key].checked) jsonAmenities[key]="N";
+                    if(!form.elements[key].checked) delete jsonAmenities.key;
                 }
                 var jsonListAndAmen= {
                     "ListingID": "001",
