@@ -31,6 +31,12 @@ public class SpawtController {
     private String connectionString = "Endpoint=sb://flyluckns.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=eNm+X5CZaEXcK9Dcsu0f5OaGDryF9vOq2Vcl3pWLPIo=";
     private String hubName = "FlyLuckHub";
     
+    @RequestMapping("/1/{userid}/{password}")
+    public String Authenticate(@PathVariable String userid, @PathVariable String password)
+    {
+        SpawtService service = new SpawtService();
+        return service.Authenticate(userid, password);
+    }
     
     @RequestMapping("/addlisting/{listing}")
     public String AddListing(@PathVariable String listing)
