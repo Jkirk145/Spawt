@@ -14,7 +14,7 @@
     <body>
         <h1>Add Listing Form</h1>
         <h2>Add A Listing by Filling Out All Fields</h2>
-        <form  onSubmit="return makeJson(this)"action="/addListing/{listing}" enctype='application/json'>
+        <form id="addingForm" action="spawtservice/addlisting/" enctype="application/json">
              <table>
                 <tr>
                     <td> Street: </td>
@@ -134,9 +134,22 @@
             <% //turn data inputted into json text and then.....(ask john what to 
             //do after that%>
         </form>
-        <pre id="results">    
+        <pre id="errors">    
         </pre>
         <script>
+            //keeps only the amenities marked "y" if not then not in json data
+            var form = document.getElementById("addingForm");
+            form.addEventListener('submit', function () {
+            var allAmenities = myForm.getElementsByTagName('input:checkbox');
+
+            for (var i = 0; i < allAmenities.length; i++) {
+                var input = allAmenities[i];
+
+                if (!input.checked) {
+                    input.name = '';
+                }
+            });
+           
             function makeJson(form){
                 
                 
@@ -180,7 +193,7 @@
 //                    "Listing": jsonListAndAmen
 //                };
 //                var jSONListing = JSON.stringify(jsonFullListing);
-//                //document.getElementById('results').innerHTML=JSON.stringify(jsonFullListing);
+//                //document.getElementById('errors').innerHTML=JSON.stringify(jsonFullListing);
 //               //return false;
 //               
             }
