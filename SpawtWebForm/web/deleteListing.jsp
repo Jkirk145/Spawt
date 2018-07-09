@@ -14,7 +14,7 @@
     <body>
         <h1>Delete Listing Form</h1>
         <h2>Deleting Listing by ID Number</h2>
-        <form onsubmit="return makeJson(this);" enctype="text/plain" name="deleteListing" action="deleteListing.jsp" type="POST">
+        <form enctype="application/json" name="deleteListing" action="/spawtservice/deleteListing" type="POST">
             <table>
                 <tr>
                     <td>Listing ID:</td>
@@ -22,11 +22,11 @@
                 </tr>
             </table>   
         </form>
+        
+        <pre name="errors"></pre>
         <input type="submit" value="Delete Listing" name="deleteListingButton"/>
         <script>
-            function makeJson(form){
-                
-            }
+          
         </script>
     </body>
 </html>

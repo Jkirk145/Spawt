@@ -1,7 +1,7 @@
 <%-- 
     Document   : updateListing
     Created on : Jul 6, 2018, 5:32:00 PM
-    Author     : apple
+    Author     : Jamila
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,9 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Update Listing</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Update Detailed Listing</h1>
+        <form name="updateForm" id="updateForm" enctype="application/json" action="spawtservice/updateListing/">
+            
+        </form>
     </body>
 </html>

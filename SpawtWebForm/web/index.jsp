@@ -10,7 +10,7 @@
     <body>
         <h1>Spawt Authentification Page</h1>
         <h2>Please enter your username and password</h2>
-        <form enctype="application/json" name="login" action="mainPage.html" method="POST">
+        <form enctype="application/json" name="login" action="/1/" method="POST">
             <table>
                 <tr>
                     <td> Username: </td>
@@ -27,5 +27,10 @@
             //password inside of the database, then move on to the next webpage
             %>
         </form>
+        <pre name="errors"></pre>
+        <script>
+         //send username and password to api and validate, if good let form finish,
+         //if not print error and stop default submit
+        </script>
     </body>
 </html>

@@ -13,6 +13,7 @@ import java.lang.String;
 import java.sql.*;
 import com.google.gson.*;
 import com.spawt.spawtservice.helpers.Helpers;
+import com.spawt.spawtservice.models.Listing;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +35,35 @@ public class SpawtService {
     static Logger log = Logger.getLogger(SpawtController.class.getName());
     
     
+    public String Authenticate(String userid, String password)
+    {
+        try{
+            cn = DBConnect();
+            st = cn.createStatement();
+            String sql = "insert into Listing...";
+            rs = st.executeQuery(sql);
+        }
+        catch (SQLException se)
+        {
+            log.error(se.toString());
+            System.out.println(se.toString());
+        }
+        finally {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
+            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
+            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
+        }
+        return "OK";
+    }
+    
     
     public String AddListing(String listing)
     {
         try{
+            
+            Gson gson = new Gson();
+            Listing l = gson.fromJson(listing, Listing.class);
+            
             cn = DBConnect();
             st = cn.createStatement();
             String sql = "insert into Listing...";

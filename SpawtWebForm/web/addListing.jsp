@@ -134,8 +134,9 @@
             <% //turn data inputted into json text and then.....(ask john what to 
             //do after that%>
         </form>
-        <pre id="errors">    
-        </pre>
+        
+        <pre id="errors"></pre>
+        
         <script>
             //keeps only the amenities marked "y" if not then not in json data
             var form = document.getElementById("addingForm");
@@ -150,9 +151,9 @@
                 }
             });
            
-            function makeJson(form){
-                
-                
+//           function makeJson(form){
+//                
+//                
 //                var jsonAmenities= {
 //                    "HardwoodFloors":form.elements["HardwoodFloors"].value,
 //                    "Parking":form.elements["Parking"].value,
@@ -196,7 +197,7 @@
 //                //document.getElementById('errors').innerHTML=JSON.stringify(jsonFullListing);
 //               //return false;
 //               
-            }
+//            }
         </script>
     </body>
 </html>
