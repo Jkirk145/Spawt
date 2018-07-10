@@ -26,13 +26,14 @@
             </table>
             <input type="button" name="Search" value="Search" onclick="searchDataBase(this)" disabled/>
         </form>
-        <table>
+        <table id="resultTable">
             
         </table>
         
         <script>
             function searchDataBase(this){
                 //request database search and fill in table under form
+                
             }
         </script>
     </body>
