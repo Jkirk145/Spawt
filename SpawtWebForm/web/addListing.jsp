@@ -176,10 +176,14 @@
                     "Backyard":form.elements["Backyard"].value,
                     "Fence":form.elements["Fence"].value,
                     "Pool":form.elements["Pool"].value,
-                    "WiFi":form.elements["WiFi"].value,
+                    "WiFi":form.elements["WiFi"].value
                 };
                 for(var key in jsonAmenities){
-                    if(!form.elements[key].checked) delete jsonAmenities.key;
+                    //console.error("inside For Loop");
+                    if(!form.elements[key].checked){
+                       // console.error(jsonAmenities);
+                        delete jsonAmenities[key];
+                    }   
                 }
                 var jsonListAndAmen= {
                     "ListingID": "001",
