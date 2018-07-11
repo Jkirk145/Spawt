@@ -14,19 +14,28 @@
     <body>
         <h1>Delete Listing Form</h1>
         <h2>Deleting Listing by ID Number</h2>
-        <form enctype="application/json" name="deleteListing" action="/spawtservice/deleteListing" type="POST">
+        <form onsubmit="return makeJson(this);" name="deleteListing" action="/spawtservice/deleteListing" type="POST">
             <table>
                 <tr>
                     <td>Listing ID:</td>
-                    <td><input type="text" id="listingID" name="listingID" value="" size="80"/></td> 
+                    <td><input type="text" id="ListingID" name="ListingID" value="" size="80"/></td> 
                 </tr>
-            </table>   
+            </table> 
+            
+            <input type="submit" value="Delete Listing" name="deleteListingButton"/>
         </form>
+
+        <pre id="errors"></pre>
         
-        <pre name="errors"></pre>
-        <input type="submit" value="Delete Listing" name="deleteListingButton"/>
         <script>
-          
+            function makeJson(form){
+                var jsonElem ={
+                    "ListingID": form.elements["ListingID"].value
+                };
+                var jSONListing = JSON.stringify(jsonElem);
+                document.getElementById('errors').innerHTML=jSONListing;
+                return false;
+            }
         </script>
     </body>
 </html>

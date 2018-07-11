@@ -10,7 +10,7 @@
     <body>
         <h1>Spawt Authentification Page</h1>
         <h2>Please enter your username and password</h2>
-        <form enctype="application/json" name="login" action="addListing.jsp" method="POST">
+        <form enctype="application/json" name="login" action="mainPage.html" method="POST">
             <table>
                 <tr>
                     <td> Username: </td>
