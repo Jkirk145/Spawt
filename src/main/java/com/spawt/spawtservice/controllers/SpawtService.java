@@ -89,13 +89,13 @@ public class SpawtService {
         try{
             
             Gson gson = new Gson();
-            //Listing l = gson.fromJson(listing, Listing.class);
-            Listing l = new Listing();
+            Listing l = gson.fromJson(listing, Listing.class);
+            /*Listing l = new Listing();
             l.Street = "Whitney Ave";
             l.City = "East Hollywood";
             l.State = "CA";
             l.Rooms = "1";
-            l.Rent = "1800";
+            l.Rent = "1800";*/
             
             
             ListingManager manager = new ListingManager();

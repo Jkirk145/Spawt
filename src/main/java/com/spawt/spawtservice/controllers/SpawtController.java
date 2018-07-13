@@ -49,6 +49,27 @@ public class SpawtController {
     public String AddListing(@PathVariable String listing)
     {
         SpawtService service = new SpawtService();
+        
+        
+        /*listing = "{\n" +
+                    "\"Listing\": {\n" +
+                    "\"ListingID\": \"001\",\n" +
+                    "\"Street\": \"1820 Whitley Ave\",\n" +
+                    "\"City\": \"Hollywood\",\n" +
+                    "\"State\": \"CA\",\n" +
+                    "\"Zip\": \"90068\",\n" +
+                    "\"Rooms\": \"3\",\n" +
+                    "\"SquareFt\": \"990\",\n" +
+                    "\"Rent\": \"$1800.00\",\n" +
+                    "\"DogsOK\": 0,\n" +
+                    "\"CatsOK\": 0,\n" +
+                    "\"SmallDogsOK\": 0,\n" +
+                    "\"MediumDogsOK\": 0,\n" +
+                    "\"LargeDogsOK\": 0,\n" +
+                    "\"Insurance\": 0\n" +
+                    "	}\n" +
+                    "}";*/
+        
         return service.AddListing(listing);
     }
     
