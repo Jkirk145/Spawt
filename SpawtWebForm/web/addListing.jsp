@@ -185,6 +185,13 @@
                         delete jsonAmenities[key];
                     }   
                 }
+                //create a string that is the amenities
+                var amenities = "";
+                for(key in jsonAmenities){
+                    amenities += key + ",";
+                }
+                //get rid of last comma
+                amenities = amenities.substring(0, amenities.length-1)
                 var jsonListAndAmen= {
                     "ListingID": "001",
                     "Street": form.elements["Street"].value,
@@ -200,7 +207,7 @@
                     "MediumDogsOK": form.elements["MediumDogsOK"].value,
                     "LargeDogsOK": form.elements["LargeDogsOK"].value,
                     "Insurance": form.elements["Insurance"].value,
-                    "Amenities": jsonAmenities
+                    "Amenities": amenities
                 };
                 //if(!form.elements[insurance].checked) jsonListAndAmen[Insurance]= "N";
                 var jsonFullListing= {
