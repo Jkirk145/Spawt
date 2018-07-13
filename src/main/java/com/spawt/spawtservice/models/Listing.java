@@ -33,7 +33,7 @@ public class Listing {
     public int MediumDogsOK = 0;
     public int SmallDogsOK = 0;
     public int Insurance = 0;
-    //public String[] Amenities;
+    public String Amenities;
     
     
     public String getStreet() {
@@ -140,13 +140,13 @@ public class Listing {
         this.Insurance = Insurance;
     }
 
-    /*public String[] getAmenities() {
+    public String getAmenities() {
         return Amenities;
     }
 
-    public void setAmenities(String[] Amenities) {
+    public void setAmenities(String Amenities) {
         this.Amenities = Amenities;
-    }*/
+    }
     
     public int ListingID;
     
