@@ -60,7 +60,7 @@ public class SendMail {
                 InternetAddress.parse(_to));
             msg.setSubject("Flight Request TEST " + request.Subject);
             msg.setText(_body);
-            msg.setHeader("X-Mailer", "FLYLUCK TEST");
+            msg.setHeader("X-Mailer", "Spawt TEST");
             msg.setSentDate(new Date());
             SMTPTransport t =
                 (SMTPTransport)session.getTransport("smtps");

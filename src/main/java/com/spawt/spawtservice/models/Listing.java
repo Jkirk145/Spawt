@@ -15,8 +15,27 @@ import javax.persistence.*;
 @Table(name="Listing")
 public class Listing {
     
+    public Listing()
+    {
+        
+    }
+    
     public String Street;
-
+    public String City;
+    public String State;
+    public String Zip;
+    public String Rooms;
+    public String SquareFt;
+    public String Rent;
+    public int DogsOK = 0;
+    public int CatsOK = 0;
+    public int LargeDogsOK = 0;
+    public int MediumDogsOK = 0;
+    public int SmallDogsOK = 0;
+    public int Insurance = 0;
+    //public String[] Amenities;
+    
+    
     public String getStreet() {
         return Street;
     }
@@ -73,61 +92,62 @@ public class Listing {
         this.Rent = Rent;
     }
 
-    public String getDogsOK() {
+    public int getDogsOK() {
         return DogsOK;
     }
 
-    public void setDogsOK(String DogsOK) {
+    public void setDogsOK(int DogsOK) {
         this.DogsOK = DogsOK;
     }
 
-    public String getCatsOK() {
+    public int getCatsOK() {
         return CatsOK;
     }
 
-    public void setCatsOK(String CatsOK) {
+    public void setCatsOK(int CatsOK) {
         this.CatsOK = CatsOK;
     }
 
-    public String getLargeDogsOK() {
+    public int getLargeDogsOK() {
         return LargeDogsOK;
     }
 
-    public void setLargeDogsOK(String LargeDogsOK) {
+    public void setLargeDogsOK(int LargeDogsOK) {
         this.LargeDogsOK = LargeDogsOK;
     }
 
-    public String getMediumDogsOK() {
+    public int getMediumDogsOK() {
         return MediumDogsOK;
     }
 
-    public void setMediumDogsOK(String MediumDogsOK) {
+    public void setMediumDogsOK(int MediumDogsOK) {
         this.MediumDogsOK = MediumDogsOK;
     }
 
-    public String getSmallDogsOK() {
+    public int getSmallDogsOK() {
         return SmallDogsOK;
     }
 
-    public void setSmallDogsOK(String SmallDogsOK) {
+    public void setSmallDogsOK(int SmallDogsOK) {
         this.SmallDogsOK = SmallDogsOK;
     }
 
-    public String getInsurance() {
+    public int getInsurance() {
         return Insurance;
     }
 
-    public void setInsurance(String Insurance) {
+    public void setInsurance(int Insurance) {
         this.Insurance = Insurance;
     }
 
-    public String[] getAmenities() {
+    /*public String[] getAmenities() {
         return Amenities;
     }
 
     public void setAmenities(String[] Amenities) {
         this.Amenities = Amenities;
-    }
+    }*/
+    
     public int ListingID;
     
     @Id
@@ -140,19 +160,8 @@ public class Listing {
     public void setListingID(int ListingID) {
         this.ListingID = ListingID;
     }
-    public String City;
-    public String State;
-    public String Zip;
-    public String Rooms;
-    public String SquareFt;
-    public String Rent;
-    public String DogsOK;
-    public String CatsOK;
-    public String LargeDogsOK;
-    public String MediumDogsOK;
-    public String SmallDogsOK;
-    public String Insurance;
-    public String[] Amenities;
+
+
     
     
 }
