@@ -193,7 +193,6 @@
                 //get rid of last comma
                 amenities = amenities.substring(0, amenities.length-1)
                 var jsonListAndAmen= {
-                    "ListingID": "001",
                     "Street": form.elements["Street"].value,
                     "City": form.elements["City"].value,
                     "State":form.elements["State"].value,
