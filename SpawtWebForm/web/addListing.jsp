@@ -14,7 +14,7 @@
     <body>
         <h1>Add Listing Form</h1>
         <h2>Add A Listing by Filling Out All Fields</h2>
-        <form onsubmit="return makeJson(this);" id="addingForm" action="spawtservice/addlisting" method="POST">
+        <form onsubmit="return makeJson(this);" id="addingForm" action="mainPage.html" method="POST">
              <table>
                 <tr>
                     <td> Street: </td>
@@ -209,13 +209,31 @@
                     "Amenities": amenities
                 };
                 //if(!form.elements[insurance].checked) jsonListAndAmen[Insurance]= "N";
-                var jsonFullListing= {
-                    "Listing": jsonListAndAmen
-                };
-                var jSONListing = JSON.stringify(jsonFullListing);
-                document.getElementById('errors').innerHTML=jSONListing;
-                return false;
-               
+                
+                var jSONListing = JSON.stringify(jsonListAndAmen);
+                //document.getElementById('errors').innerHTML=jSONListing;
+                
+                //now call api
+                
+                var httpRequest = new XMLHttpRequest();
+                var url = 'http://localhost:8080/SpawtService/addlisting/'+ jSONListing;
+                //console.log(url);
+                var params = jSONListing;
+                httpRequest.open('POST', url, true);
+                //Send the proper header information along with the request
+                httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+                httpRequest.onreadystatechange = function() {//Call a function when the state changes.
+                    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+                        //alert(httpRequest.responseText);
+                        document.getElementById('errors').innerHTML=httpRequest.responseText;
+                    }
+                    else {
+                        document.getElementById('errors').innerHTML=httpRequest.responseText;
+                    }
+                }
+                //if returns error return false, else let form go to mainPage
+                //return false;  
             }
         </script>
     </body>

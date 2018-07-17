@@ -13,6 +13,7 @@ import java.lang.String;
 import java.sql.*;
 import com.google.gson.*;
 import com.spawt.spawtservice.helpers.Helpers;
+import com.spawt.spawtservice.helpers.ListingManager;
 import com.spawt.spawtservice.models.Listing;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,13 +50,39 @@ public class SpawtService {
             System.out.println(se.toString());
         }
         finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
+            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetHolds: " + e.toString());}  
+            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetHolds: " + e.toString());}  
+            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetHolds: " + e.toString());}  
         }
         return "OK";
     }
     
+    
+    public String TestDB()
+    {
+        String retval = "Connected...";
+        //cn = DBConnect();
+        try{
+            cn = DBConnect();
+            st = cn.createStatement();
+            String sql = "insert into Listing...";
+            
+        }
+        catch (SQLException se)
+        {
+            log.error(se.toString());
+            System.out.println(se.toString());
+            retval = se.toString();
+        }
+        finally {  
+            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetHolds: " + e.toString());}  
+            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetHolds: " + e.toString());}  
+            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetHolds: " + e.toString());}  
+        }
+        return retval;
+    
+    
+    }
     
     public String AddListing(String listing)
     {
@@ -63,21 +90,28 @@ public class SpawtService {
             
             Gson gson = new Gson();
             Listing l = gson.fromJson(listing, Listing.class);
+            /*Listing l = new Listing();
+            l.Street = "Whitney Ave";
+            l.City = "East Hollywood";
+            l.State = "CA";
+            l.Rooms = "1";
+            l.Rent = "1800";*/
             
-            cn = DBConnect();
-            st = cn.createStatement();
-            String sql = "insert into Listing...";
-            rs = st.executeQuery(sql);
+            
+            ListingManager manager = new ListingManager();
+            manager.setup();
+            manager.create(l);
+            manager.exit();
+            
+            //cn = DBConnect();
+            //st = cn.createStatement();
+
+            //rs = st.executeQuery(sql);
         }
-        catch (SQLException se)
+        catch (Exception e)
         {
-            log.error(se.toString());
-            System.out.println(se.toString());
-        }
-        finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetHolds: " + e.toString());}  
+            log.error(e.toString());
+            System.out.println(e.toString());
         }
         return "OK";
     }
@@ -100,9 +134,9 @@ public class SpawtService {
             System.out.println(se.toString());
         }
         finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
+            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
         }
         return json;
 
@@ -124,9 +158,9 @@ public class SpawtService {
             System.out.println(se.toString());
         }
         finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
+            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
         }
         return json;
 
@@ -148,9 +182,9 @@ public class SpawtService {
             System.out.println(se.toString());
         }
         finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in FlyLUCKService.GetMx: " + e.toString());}  
+            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
         }
         return json;
 
@@ -162,7 +196,7 @@ public class SpawtService {
         
         Connection cn = null;
         try{
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
             String conn = helper.GetConnectionString();
             cn = DriverManager.getConnection(conn);
         }
@@ -173,6 +207,10 @@ public class SpawtService {
         catch (SQLException se){
             log.error(se.toString());
             System.out.println(se.toString());
+        }
+        catch (Exception ex){
+            log.error(ex.toString());
+            System.out.println(ex.toString());
         }
         return cn;
     }

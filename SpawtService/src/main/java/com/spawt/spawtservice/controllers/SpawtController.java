@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 import org.apache.log4j.*;
 import org.springframework.web.bind.annotation.PathVariable;
-import com.windowsazure.messaging.Notification;
-import com.windowsazure.messaging.NotificationHub;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,8 +27,16 @@ public class SpawtController {
     
     static Logger log = Logger.getLogger(SpawtController.class.getName());
     
-    private String connectionString = "Endpoint=sb://flyluckns.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=eNm+X5CZaEXcK9Dcsu0f5OaGDryF9vOq2Vcl3pWLPIo=";
-    private String hubName = "FlyLuckHub";
+    
+    
+    
+    @RequestMapping("/getalllistings")
+    public static String GetAllListings()
+    {
+        //SpawtService service = new SpawtService();
+        //return service.TestDB();
+        return "Hello Spawt User!";
+    }
     
     @RequestMapping("/1/{userid}/{password}")
     public String Authenticate(@PathVariable String userid, @PathVariable String password)
@@ -42,6 +49,27 @@ public class SpawtController {
     public String AddListing(@PathVariable String listing)
     {
         SpawtService service = new SpawtService();
+        
+        
+        /*listing = "{\n" +
+                    "\"Listing\": {\n" +
+                    "\"ListingID\": \"001\",\n" +
+                    "\"Street\": \"1820 Whitley Ave\",\n" +
+                    "\"City\": \"Hollywood\",\n" +
+                    "\"State\": \"CA\",\n" +
+                    "\"Zip\": \"90068\",\n" +
+                    "\"Rooms\": \"3\",\n" +
+                    "\"SquareFt\": \"990\",\n" +
+                    "\"Rent\": \"$1800.00\",\n" +
+                    "\"DogsOK\": 0,\n" +
+                    "\"CatsOK\": 0,\n" +
+                    "\"SmallDogsOK\": 0,\n" +
+                    "\"MediumDogsOK\": 0,\n" +
+                    "\"LargeDogsOK\": 0,\n" +
+                    "\"Insurance\": 0\n" +
+                    "	}\n" +
+                    "}";*/
+        
         return service.AddListing(listing);
     }
     
@@ -66,27 +94,6 @@ public class SpawtController {
         return service.DeleteListing(listingid);
     }
     
-    @RequestMapping(value="/sendmessage")
-    public String SendMessage (@RequestParam Map<String, String> RequestParams)
-    {
-        String message = "";
-        String tags = "";
-        message = RequestParams.get("message");
-        tags = RequestParams.get("tags");
-        
-        List<String> tagList = Arrays.asList(tags.split(","));
-        
-        Set<String> tagSet = new HashSet<String>(tagList);
-        
-        NotificationHub hub = new NotificationHub(connectionString, hubName);
 
-        Notification gn = Notification.createGcmNotifiation(message);
-        Notification an = Notification.createAppleNotifiation(message);
-        
-        hub.sendNotification(gn, tagSet);
-        hub.sendNotification(an, tagSet);
-        
-        return "Message sent";
-    }
     
 }
