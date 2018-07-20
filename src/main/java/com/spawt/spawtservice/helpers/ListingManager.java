@@ -35,15 +35,19 @@ public class ListingManager {
         sessionFactory.close();
     }
  
-    public void create(Listing l) {
+    public int create(Listing l) {
         // code to save a book
+        int listingID = 0;
+        
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         
-        session.save(l);
+        listingID = (int)session.save(l);
         
         session.getTransaction().commit();
         session.close();
+        
+        return listingID;
     }
  
     protected void read() {
