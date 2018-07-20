@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.*;
+import java.util.List;
+
 /**
  *
  * @author johnkirksey
@@ -172,24 +174,26 @@ public class SpawtService {
     
     public String GetListing(String listingID)
     {
+        String json = "";
+        
+        
         try{
-            cn = DBConnect();
-            st = cn.createStatement();
-            String sql = "select pob.legid, pob.PAXNAME, p.CELLPHONE, p.EMAIL from t_PassengersOnBoard pob INNER JOIN t_Passengers p ON p.PAXID = pob.PAXID where LEGID = '" + listingID + "'";
-            rs = st.executeQuery(sql);
+            List<Listing> listings = null;
+            
+            ListingManager manager = new ListingManager();
+            manager.setup();
+            listings = manager.read("...");
+            manager.exit();
+            
             Gson gson = new Gson();
-            json = gson.toJson(RSToArrayList(rs));
+            json = gson.toJson(listings);
         }
-                catch (SQLException se)
+        catch (Exception e)
         {
-            log.error(se.toString());
-            System.out.println(se.toString());
+            log.error(e.toString());
+            System.out.println(e.toString());
         }
-        finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-        }
+        
         return json;
 
     }
