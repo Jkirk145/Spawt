@@ -46,33 +46,33 @@
                 </tr>
                 <tr>
                     <td> Dogs Allowed: </td>
-                    <td><input type="radio" name="DogsOK" value="Y"/> YES</td>
-                    <td><input type="radio" name="DogsOK" value="N"/> NO</td>
+                    <td><input type="radio" name="DogsOK" value="1"/> YES</td>
+                    <td><input type="radio" name="DogsOK" value="0"/> NO</td>
                 </tr>
                  <tr>
                     <td> Cats Allowed: </td>
-                    <td><input type="radio" name="CatsOK" value="Y"/> YES</td>
-                    <td><input type="radio" name="CatsOK" value="N"/> NO</td>
+                    <td><input type="radio" name="CatsOK" value="1"/> YES</td>
+                    <td><input type="radio" name="CatsOK" value="0"/> NO</td>
                 </tr>
                 <tr>
                     <td> Small Dogs Allowed: </td>
-                    <td><input type="radio" name="SmallDogsOK" value="Y"/> YES</td>
-                    <td><input type="radio" name="SmallDogsOK" value="N"/> NO</td>
+                    <td><input type="radio" name="SmallDogsOK" value="1"/> YES</td>
+                    <td><input type="radio" name="SmallDogsOK" value="0"/> NO</td>
                 </tr>
                 <tr>
                     <td> Medium Dogs Allowed: </td>
-                    <td><input type="radio" name="MediumDogsOK" value="Y"/> YES</td>
-                    <td><input type="radio" name="MediumDogsOK" value="N"/> NO</td>
+                    <td><input type="radio" name="MediumDogsOK" value="1"/> YES</td>
+                    <td><input type="radio" name="MediumDogsOK" value="0"/> NO</td>
                 </tr>
                 <tr>
                     <td> Large Dogs Allowed: </td>
-                    <td><input type="radio" name="LargeDogsOK" value="Y"/> YES</td>
-                    <td><input type="radio" name="LargeDogsOK" value="N"/> NO</td>
+                    <td><input type="radio" name="LargeDogsOK" value="1"/> YES</td>
+                    <td><input type="radio" name="LargeDogsOK" value="0"/> NO</td>
                 </tr>
                 <tr>
                     <td> Insurance: </td>
-                    <td><input type="radio" name="Insurance" value="Y"/> YES</td>
-                    <td><input type="radio" name="Insurance" value="N"/> NO</td>
+                    <td><input type="radio" name="Insurance" value="1"/> YES</td>
+                    <td><input type="radio" name="Insurance" value="0"/> NO</td>
                 </tr>
             </table>
             <fieldset>
@@ -217,7 +217,7 @@
                 
                 var httpRequest = new XMLHttpRequest();
                 var url = 'http://localhost:8080/SpawtService/addlisting/'+ jSONListing;
-                //console.log(url);
+                console.log(url);
                 var params = jSONListing;
                 httpRequest.open('POST', url, true);
                 //Send the proper header information along with the request
@@ -233,7 +233,7 @@
                     }
                 }
                 //if returns error return false, else let form go to mainPage
-                //return false;  
+                return false;  
             }
         </script>
     </body>
