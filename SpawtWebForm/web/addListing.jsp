@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="#" />
         <title>Listing Form</title>
     </head>
     <body>
@@ -214,26 +215,27 @@
                 //document.getElementById('errors').innerHTML=jSONListing;
                 
                 //now call api
-                
                 var httpRequest = new XMLHttpRequest();
                 var url = 'http://localhost:8080/SpawtService/addlisting/'+ jSONListing;
-                console.log(url);
-                var params = jSONListing;
+                //console.log(url);
                 httpRequest.open('POST', url, true);
                 //Send the proper header information along with the request
-                httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
+                httpRequest.setRequestHeader('Content-type', 'application/json');
+                console.log("set request header")
                 httpRequest.onreadystatechange = function() {//Call a function when the state changes.
-                    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-                        //alert(httpRequest.responseText);
-                        document.getElementById('errors').innerHTML=httpRequest.responseText;
+                    if(this.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+                        //if string is not an error but an id
+                        if(!(httpRequest.responseText.substring(0,4)=="java")){
+                            window.location.href = "http://localhost:8080/mainPage.html";
+                        }
+                        //else it is an error
+                        else{
+                            document.getElementById('errors').innerHTML=httpRequest.responseText;
+                        }
                     }
-                    else {
-                        document.getElementById('errors').innerHTML=httpRequest.responseText;
-                    }
-                }
-                //if returns error return false, else let form go to mainPage
-                return false;  
+                } 
+                httpRequest.send();
+                return false;
             }
         </script>
     </body>

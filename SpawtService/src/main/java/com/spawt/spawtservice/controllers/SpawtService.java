@@ -14,7 +14,7 @@ import java.sql.*;
 import com.google.gson.*;
 import com.spawt.spawtservice.helpers.Helpers;
 import com.spawt.spawtservice.helpers.ListingManager;
-import com.spawt.spawtservice.models.Listing;
+import com.spawt.spawtservice.models.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,10 +86,13 @@ public class SpawtService {
     
     public String AddListing(String listing)
     {
+        String listingID = "NULL";
+        Gson gson = new Gson();
         try{
             
-            Gson gson = new Gson();
+            
             Listing l = gson.fromJson(listing, Listing.class);
+            Foo f = gson.fromJson(listing, Foo.class);
             /*Listing l = new Listing();
             l.Street = "Whitney Ave";
             l.City = "East Hollywood";
@@ -100,7 +103,7 @@ public class SpawtService {
             
             ListingManager manager = new ListingManager();
             manager.setup();
-            manager.create(l);
+            listingID = Integer.toString(manager.create(l));
             manager.exit();
             
             //cn = DBConnect();
@@ -110,10 +113,11 @@ public class SpawtService {
         }
         catch (Exception e)
         {
+            listingID = e.toString();
             log.error(e.toString());
             System.out.println(e.toString());
         }
-        return "OK";
+        return listingID;
     }
     
     
