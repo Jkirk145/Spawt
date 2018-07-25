@@ -86,14 +86,14 @@ public class SpawtController {
     }
     
     
-    @RequestMapping("/updateListing/{listing}")
+    @RequestMapping("/updatelisting/{listing}")
     public String UpdateListing(@PathVariable String listing)
     {
         SpawtService service = new SpawtService();
         return service.UpdateListing(listing);
     }
     
-    @RequestMapping("deleteListing/{listingid}")
+    @RequestMapping("deletelisting/{listingid}")
     public String DeleteListing(@PathVariable int listingid)
     {
         SpawtService service = new SpawtService();
