@@ -61,14 +61,8 @@ public class ListingManager {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
 
-            listings = session.createQuery("FROM Listing").list();
+            listings = session.createQuery("FROM Listing " + whereClause).list();
 
-            for (Iterator iterator = listings.iterator(); iterator.hasNext();)
-            {
-                Listing l = (Listing)iterator.next();
-                System.out.println("Street: " + l.Street);
-                System.out.println("City: " + l.City);
-            }
 
             session.getTransaction().commit();
             session.close();
@@ -84,8 +78,18 @@ public class ListingManager {
         // code to modify a book
     }
  
-    protected void delete() {
+    public void delete(int listingID) {
         // code to remove a book
+        Listing listing = new Listing();
+        listing.setListingID(listingID);
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.delete(listing);
+
+        session.getTransaction().commit();
+        session.close();
     }
  
     public static void main(String[] args) {
