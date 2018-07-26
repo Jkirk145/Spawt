@@ -5,6 +5,9 @@
  */
 package com.spawt.spawtservice.helpers;
 
+import java.util.List;
+import java.util.Iterator;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -50,16 +53,43 @@ public class ListingManager {
         return listingID;
     }
  
-    protected void read() {
+    public List<Listing> read(String whereClause) {
         // code to get a book
+        List listings = null;
+        try{
+            
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+            listings = session.createQuery("FROM Listing " + whereClause).list();
+
+
+            session.getTransaction().commit();
+            session.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.toString());
+        }
+        return listings;
     }
  
     protected void update() {
         // code to modify a book
     }
  
-    protected void delete() {
+    public void delete(int listingID) {
         // code to remove a book
+        Listing listing = new Listing();
+        listing.setListingID(listingID);
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.delete(listing);
+
+        session.getTransaction().commit();
+        session.close();
     }
  
     public static void main(String[] args) {

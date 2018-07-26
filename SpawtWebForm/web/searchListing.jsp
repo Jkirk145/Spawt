@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Search For Listings</h1>
-        <form onsubmit="return searchDataBase(this);" name="searchForm" id="searchForm" action="mainPage.html">
+        <form onsubmit="return searchDataBase();" name="searchForm" id="searchForm" action="mainPage.html">
             <table>
                 <tr>
                     <td> Street: </td>
@@ -36,32 +36,35 @@
         <pre id="errors"></pre>
         
         <script>
-            function searchDataBase(form){
+            function searchDataBase(){
                 //request database search and fill in table under form
                 //now call api
                 var httpRequest = new XMLHttpRequest();
-                var searchParams = "?Street="+ document.getElementById("Street").value +
-                        "City="+ document.getElementByID("City") +"Zip="+ document.getElementById("Zip").value;
-                var url = 'http://localhost:8080/SpawtService/getlisting/'+ searchParams;
-                //console.log(url);
-                httpRequest.open('POST', url, true);
-                //Send the proper header information along with the request
-                httpRequest.setRequestHeader('Content-type', 'application/json');
-                console.log("set request header")
-                httpRequest.onreadystatechange = function() {//Call a function when the state changes.
-                    if(this.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
-                        //alert(httpRequest.responseText);
-                        if(httpRequest.responseText){
-                            fillTable();
+                var searchParams = "?street="+ document.getElementById("Street").value + 
+                        "&zip="+ document.getElementById("Zip").value;
+                var url = 'http://localhost:8080/SpawtService/getlisting'+ searchParams;
+                console.log(url);
+                httpRequest.open('GET', url,true);
+                httpRequest.onreadystatechange = function() {//Call a function when the state changes
+                        if(this.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+                            if(httpRequest.responseText){
+                                var response= JSON.parse(httpRequest.responseText);
+                                console.log(response);
+                                if((httpRequest.responseText.substring(0,4)=="java")){
+                                    document.getElementById('errors').innerHTML=httpRequest.responseText;
+                                }
+                                else{
+                                    //console.log("went in else");
+                                    fillTable(response); 
+                                } 
+                            }
+                            else{
+                                fillTable(httpRequest.responseText);
+                                document.getElementById('errors').innerHTML="No Matching Listings";
+                            }
                         }
-                        else{
-                            console.log(httpRequest.responseText);
-                            document.getElementById('errors').innerHTML=httpRequest.responseText;
-                            console.log("error");
-                        }
-                    }
-                } 
-                httpRequest.send();
+                    } 
+                httpRequest.send('');
                 return false;
             }
             //if api call returns array of listing put the listing in the table
@@ -69,6 +72,7 @@
                  //now fill table with database stuff
                 //make each table entry clickable to detailed page
                 var tableRef = document.getElementById('resultTable');
+                console.log(JSON.stringify(arrayOfListings));
                 // Insert a row in the table at the last row
                 var newRow   = tableRef.insertRow(tableRef.rows.length);
                 // Insert a cell in the row at index 0
@@ -77,7 +81,7 @@
                 var newCell2 = newRow.insertCell(2);
                 // Append a text node to the cell
                 newCell1.innerHTML = '<button name="updateButton" onclick="return updateListing(listing);" name="updateButton">Update</button>'
-                newCell2.innerHTML = '<button name="deleteButton" onclick="return deleteListing(listingId);" name="deleteButton">Delete</button>'
+                newCell2.innerHTML = '<button name="deleteButton" onclick="return deleteListing(4);" name="deleteButton">Delete</button>'
                 var newText  = document.createTextNode('Listing ID');
                 newCell.appendChild(newText);
             }
@@ -88,11 +92,29 @@
             }
             //listing Id is just the id of the listing (varchar)
             function deleteListing(listingId){
-                var jsonElem ={
-                    "ListingID": listingId
-                };
-                var jSONListing = JSON.stringify(jsonElem);
                 
+                //now call api
+                var httpRequest = new XMLHttpRequest();
+                var url = 'http://localhost:8080/SpawtService/deletelisting/'+ listingId;
+                //console.log(url);
+                httpRequest.open('POST', url, true);
+                //Send the proper header information along with the request
+                httpRequest.setRequestHeader('Content-type', 'application/json');
+                console.log("set request header")
+                httpRequest.onreadystatechange = function() {//Call a function when the state changes.
+                    if(this.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+                        //if string is not an error but an id
+                        if(!(httpRequest.responseText.substring(0,4)=="java")){
+                            //if deleted the listing go to main page agian
+                            window.location.href = "http://localhost:8080/mainPage.html";
+                        }
+                        //else it is an error
+                        else{
+                            document.getElementById('errors').innerHTML=httpRequest.responseText;
+                        }
+                    }
+                } 
+                httpRequest.send();
                 return false;
             }
         </script>

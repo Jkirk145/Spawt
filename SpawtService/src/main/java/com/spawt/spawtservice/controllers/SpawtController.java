@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Iterator;
 
 /**
  *
@@ -73,22 +74,27 @@ public class SpawtController {
         return service.AddListing(listing);
     }
     
-    @RequestMapping("/getlisting/{queryparams}")
-    public String GetListing(@PathVariable String queryparams)
+    @RequestMapping("/getlisting")
+    public String GetListing(@RequestParam Map<String, String> SearchParams)
     {
+        
+        //SearchParams.forEach((k, v) -> System.out.println("Key: " + k + " / Value + " + v));
+        
+        
         SpawtService service = new SpawtService();
-        return service.GetListing(queryparams);
+        return service.GetListing(SearchParams);
     }
     
-    @RequestMapping("/updateListing/{listing}")
+    
+    @RequestMapping("/updatelisting/{listing}")
     public String UpdateListing(@PathVariable String listing)
     {
         SpawtService service = new SpawtService();
         return service.UpdateListing(listing);
     }
     
-    @RequestMapping("deleteListing/{listingid}")
-    public String DeleteListing(@PathVariable String listingid)
+    @RequestMapping("deletelisting/{listingid}")
+    public String DeleteListing(@PathVariable int listingid)
     {
         SpawtService service = new SpawtService();
         return service.DeleteListing(listingid);

@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.*;
+import java.util.List;
+import java.util.Map.Entry;
+
 /**
  *
  * @author johnkirksey
@@ -146,50 +149,64 @@ public class SpawtService {
 
     }
     
-    public String DeleteListing(String listingID)
+    
+    public String DeleteListing(int listingID)
     {
-        try{
-            cn = DBConnect();
-            st = cn.createStatement();
-            String sql = "select pob.legid, pob.PAXNAME, p.CELLPHONE, p.EMAIL from t_PassengersOnBoard pob INNER JOIN t_Passengers p ON p.PAXID = pob.PAXID where LEGID = '" + listingID + "'";
-            rs = st.executeQuery(sql);
-            Gson gson = new Gson();
-            json = gson.toJson(RSToArrayList(rs));
-        }
-                catch (SQLException se)
+        String retVal = "Listing has been removed successfully";
+        ListingManager manager = new ListingManager();
+        try
         {
-            log.error(se.toString());
-            System.out.println(se.toString());
+            manager.setup();
+            manager.delete(listingID);
         }
-        finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+        catch (Exception e)
+        {
+            retVal = e.toString();
         }
-        return json;
-
+        finally
+        {
+            manager.exit();
+         }
+        return retVal;
+        
     }
     
-    public String GetListing(String listingID)
+    public String GetListing(Map <String, String> params)
     {
-        try{
-            cn = DBConnect();
-            st = cn.createStatement();
-            String sql = "select pob.legid, pob.PAXNAME, p.CELLPHONE, p.EMAIL from t_PassengersOnBoard pob INNER JOIN t_Passengers p ON p.PAXID = pob.PAXID where LEGID = '" + listingID + "'";
-            rs = st.executeQuery(sql);
-            Gson gson = new Gson();
-            json = gson.toJson(RSToArrayList(rs));
-        }
-                catch (SQLException se)
+        //params = "Street="
+        String json = "";
+        
+        String paramString = "WHERE ";
+        int i = 0;
+        
+        for(Map.Entry<String, String> entry : params.entrySet())
         {
-            log.error(se.toString());
-            System.out.println(se.toString());
+            paramString += entry.getKey() + " LIKE '%" + entry.getValue() + "%'";
+            i++;
+            if(i < params.size() )
+                paramString += " OR ";
+            else
+                break;
         }
-        finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+        
+        
+        try{
+            List<Listing> listings = null;
+            
+            ListingManager manager = new ListingManager();
+            manager.setup();
+            listings = manager.read(paramString);
+            manager.exit();
+            
+            Gson gson = new Gson();
+            json = gson.toJson(listings);
         }
+        catch (Exception e)
+        {
+            log.error(e.toString());
+            System.out.println(e.toString());
+        }
+        
         return json;
 
     }
