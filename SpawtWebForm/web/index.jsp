@@ -52,6 +52,8 @@
                     }
                 } 
                 httpRequest.send();
+                //because api call not set up just go to main page immediately
+                window.location.href = "http://localhost:8080/mainPage.html";
                 return false;
          }
         </script>
