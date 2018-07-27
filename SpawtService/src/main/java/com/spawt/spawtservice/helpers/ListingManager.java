@@ -63,7 +63,6 @@ public class ListingManager {
 
             listings = session.createQuery("FROM Listing " + whereClause).list();
 
-
             session.getTransaction().commit();
             session.close();
         }
@@ -74,8 +73,23 @@ public class ListingManager {
         return listings;
     }
  
-    protected void update() {
+    public void update(Listing l) {
         // code to modify a book
+        try
+        {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+            session.update(l);
+
+            session.getTransaction().commit();
+            session.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.toString());
+        }
+        
     }
  
     public void delete(int listingID) {

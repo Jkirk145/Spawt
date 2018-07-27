@@ -125,27 +125,30 @@ public class SpawtService {
     
     
     
-    public String UpdateListing(String listingID)
+    public String UpdateListing(String listing)
     {
-        try{
-            cn = DBConnect();
-            st = cn.createStatement();
-            String sql = "select NAME, CELLULAR from t_Crew c INNER JOIN t_CrewOnBoard cob on cob.CREWID = c.CREWID where cob.LEGID = '" + listingID + "'";
-            rs = st.executeQuery(sql);
-            Gson gson = new Gson();
-            json = gson.toJson(RSToArrayList(rs));
-        }
-                catch (SQLException se)
+        String retVal = "";
+        Gson gson = new Gson();
+        
+        
+        Listing l = new Listing();
+        ListingManager manager = new ListingManager();
+        try
         {
-            log.error(se.toString());
-            System.out.println(se.toString());
+            l = gson.fromJson(listing, Listing.class);
+            manager.setup();
+            manager.update(l);
+
         }
-        finally {  
-            if (rs != null) try { rs.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (st != null) try { st.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
-            if (cn != null) try { cn.close(); } catch(Exception e) {log.error("Error in SpawtService.GetMx: " + e.toString());}  
+        catch (Exception e)
+        {
+            retVal = e.toString();
         }
-        return json;
+        finally 
+        {  
+             manager.exit();
+        }
+        return retVal;
 
     }
     
