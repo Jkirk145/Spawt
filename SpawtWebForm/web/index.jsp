@@ -5,10 +5,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Spawt Authentification Page</title>
+        <title>Spawt Authentication Page</title>
     </head>
     <body>
-        <h1>Spawt Authentification Page</h1>
+        <h1>Spawt Authentication Page</h1>
         <h2>Please enter your username and password</h2>
         <form onsubmit="return validateUser(this);" name="login" action="" method="POST">
             <table>

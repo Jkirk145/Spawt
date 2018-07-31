@@ -35,6 +35,8 @@
         </table>
         <pre id="errors"></pre>
         
+        <input id="updateListing" type="hidden" value="">
+        
         <script>
             function searchDataBase(){
                 //clear table and error bar
@@ -69,19 +71,21 @@
                     }
                 } 
                 var url = 'http://localhost:8080/SpawtService/getlisting'+ searchParams;
-                console.log(url);
+                //console.log(url);
                 httpRequest.open('GET', url,true);
                 httpRequest.onreadystatechange = function() {//Call a function when the state changes
                         if(this.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
-                            console.log("response text"+ httpRequest.responseText);
+                            //console.log("response text"+ httpRequest.responseText);
                             if(httpRequest.responseText !='[]'){
                                 var response= httpRequest.responseText;
-                                console.log(JSON.stringify(response));
+                                //console.log(JSON.stringify(response));
                                 if((httpRequest.responseText.substring(0,4)=="java")){
                                     document.getElementById('errors').innerHTML=httpRequest.responseText;
                                 }
                                 else{
                                     //console.log("went in else");
+                                    document.getElementById('updateListing').value = response;
+                                    console.log(document.getElementById('updateListing').value);
                                     fillTable(response); 
                                 } 
                             }
@@ -103,21 +107,27 @@
                 // Insert a row in the table at the last row
                 var parsedJSON = JSON.parse(arrayOfListings);
                 for (var i=0;i<parsedJSON.length;i++) {
+                    //console.log(" listing: " + JSON.stringify(parsedJSON[i]));
                     var newRow   = tableRef.insertRow(tableRef.rows.length);
                     // Insert a cell in the row at index 0
                     var newCell  = newRow.insertCell(0);
                     var newCell1 = newRow.insertCell(1);
                     var newCell2 = newRow.insertCell(2);
                     // Append a text node to the cell
-                    newCell1.innerHTML = '<button name="updateButton" onclick="return updateListing('+ parsedJSON[i]+ ');" name="updateButton">Update</button>'
+                    //var stringListing= JSON.stringify(parsedJSON[i]);
+                    //console.log(stringListing);
+                    newCell1.innerHTML = '<button name="updateButton" onclick="return updateListing('+ i +');" name="updateButton">Update</button>'
                     newCell2.innerHTML = '<button name="deleteButton" onclick="return deleteListing('+ parsedJSON[i].ListingID + ');" name="deleteButton">Delete</button>'
                     var newText  = document.createTextNode('Listing: ' + parsedJSON[i].Street + ' ' + parsedJSON[i].City);
                     newCell.appendChild(newText);   
                 }
             }
             //listing is the json variable of the one listing
-            function updateListing(listing){
-                
+            function updateListing(listingNum){
+                var listing = JSON.parse(document.getElementById('updateListing').value);
+                var theListing = JSON.stringify(listing[listingNum]);
+                var mylistParam = encodeURIComponent(theListing);
+                window.location.href = "updateListing.jsp?theListing=" + mylistParam;
                 return false;
             }
             //listing Id is just the id of the listing (varchar)
@@ -130,7 +140,7 @@
                 httpRequest.open('POST', url, true);
                 //Send the proper header information along with the request
                 httpRequest.setRequestHeader('Content-type', 'application/json');
-                console.log("set request header")
+                //console.log("set request header")
                 httpRequest.onreadystatechange = function() {//Call a function when the state changes.
                     if(this.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
                         //if string is not an error but an id
