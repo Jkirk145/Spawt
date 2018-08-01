@@ -167,9 +167,12 @@
            document.getElementById("updatingForm").elements["ListingID"].value = updateList.ListingID;
            
            var amenities = updateList.Amenities;
-           var splitAmen = amenities.split(",");
-           for(var amen in splitAmen){
-               document.getElementById("updatingForm").elements[amen].checked = "YES";  
+           var splitAmenities = amenities.split(",");
+           //console.log(splitAmenities[0]);
+           
+           for(var i = 0; i < splitAmenities.length; i++){
+               //console.log(splitAmenities[i]);
+               document.getElementById("updatingForm").elements[splitAmenities[i]].checked= "true";  
            }
         
            
