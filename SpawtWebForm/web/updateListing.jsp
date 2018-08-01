@@ -237,7 +237,7 @@
                 httpRequest.open('POST', url, true);
                 //Send the proper header information along with the request
                 httpRequest.setRequestHeader('Content-type', 'application/json');
-                console.log("set request header")
+                //console.log("set request header")
                 httpRequest.onreadystatechange = function() {//Call a function when the state changes.
                     if(this.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
                         //if string is not an error but an id
