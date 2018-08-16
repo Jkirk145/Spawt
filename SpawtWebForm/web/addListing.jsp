@@ -11,6 +11,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="#" />
         <title>Listing Form</title>
+        
+        <style>
+            #selectedFiles img {
+		max-width: 125px;
+		max-height: 125px;
+		float: left;
+		margin-bottom:10px;
+            }
+        </style>
     </head>
     <body>
         <h1>Add Listing Form</h1>
@@ -131,6 +140,9 @@
                         <label for="WiFi">WiFi</label>
                     </div>
             </fieldset>
+            Files: <input type="file" id="files" name="files" multiple accept="image/*"><br/>
+            <div id="selectedFiles"></div>
+
             <input type="submit" value="submit Listing" name="submitListingButton"/>
             <% //turn data inputted into json text and then.....(ask john what to 
             //do after that%>
@@ -140,27 +152,28 @@
         <pre id="errors"></pre>
         
         <script>
-            //keeps only the amenities marked "y" if not then not in json data
-//            var form = document.getElementById("addingForm");
-//            form.addEventListener('submit', function () {
-//                var allAmenities = myForm.getElementsByTagName('input:checkbox');
-//
-//                for (var i = 0; i < allAmenities.length; i++) {
-//                    var input = allAmenities[i];
-//
-//                    if (!input.checked) {
-//                        input.name = '';
-//                    }
-//                }
-//            });
-//           form.addEventListener('submit', function (){
-//               form.submitListingButton.preventDefault();
-//               var allInputs = myForm.getElementsByTagName('input');
-//               
-//               for(vari = 0; i < allInputs.length; i++){
-//                   
-//               }
-//           });
+            var selDiv = "";
+            document.addEventListener("DOMContentLoaded", init, false);
+            
+            function init() {
+		document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+		selDiv = document.querySelector("#selectedFiles");
+            }
+		
+            function handleFileSelect(e) {
+		if(!e.target.files || !window.FileReader) return;
+		selDiv.innerHTML = "";
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		filesArr.forEach(function(f) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
+				selDiv.innerHTML += html;				
+			}
+			reader.readAsDataURL(f); 
+		});
+            } 
            function makeJson(form){
                 
                 
