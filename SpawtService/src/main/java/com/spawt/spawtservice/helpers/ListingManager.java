@@ -52,6 +52,35 @@ public class ListingManager {
         
         return listingID;
     }
+    
+    public int createImage(Picture p){
+        
+        int imageId = 0;
+        
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        imageId = (int)session.save(p);
+        session.getTransaction().commit();
+        session.close();
+        
+        return imageId;
+        
+    }
+    
+    
+     public void deleteImage(int imageID) {
+        // code to remove a book
+        Picture picture = new Picture();
+        picture.setPictureID(imageID);
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.delete(picture);
+
+        session.getTransaction().commit();
+        session.close();
+    }
  
     public List<Listing> read(String whereClause) {
         // code to get a book

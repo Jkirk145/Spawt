@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
+import java.io.IOException;
 
 /**
  *
@@ -37,6 +38,18 @@ public class SpawtController {
         //SpawtService service = new SpawtService();
         //return service.TestDB();
         return "Hello Spawt User!";
+    }
+    
+    @RequestMapping("/addimage/{image}/{listingId}/{tag}")
+    public String AddImage(@PathVariable String image, @PathVariable int listingId, @PathVariable String tag){
+       SpawtService service = new SpawtService();
+       return service.AddImage(image, listingId, tag);
+    }
+    
+    @RequestMapping("/deleteimage/{imageId}")
+    public String DeleteImage(@PathVariable int imageId){
+        SpawtService service = new SpawtService();
+        return service.DeleteImage(imageId);
     }
     
     @RequestMapping("/1/{userid}/{password}")

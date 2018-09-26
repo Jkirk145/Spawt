@@ -260,6 +260,55 @@ public class SpawtService {
         
         return al;
     }
+
+    String AddImage(String image, int listingId, String tag) {
+        
+        String imageID = "NULL";
+        try{
+            
+            Picture p = new Picture();
+            p.setListingId(listingId);
+            p.setImageLink(image);
+            p.setTag(tag);
+      
+            ListingManager manager = new ListingManager();
+            manager.setup();
+            imageID = Integer.toString(manager.createImage(p));
+            manager.exit();
+        
+        }
+        catch (Exception e)
+        {
+            imageID = e.toString();
+            log.error(e.toString());
+            System.out.println(e.toString());
+        }
+        return imageID;
+    }
+    
+    
+    public String DeleteImage(int imageId)
+    {
+        String retVal = "image has been removed successfully";
+        ListingManager manager = new ListingManager();
+        try
+        {
+            manager.setup();
+            manager.deleteImage(imageId);
+        }
+        catch (Exception e)
+        {
+            retVal = e.toString();
+        }
+        finally
+        {
+            manager.exit();
+         }
+        return retVal;
+        
+    }
+
+
     
     
 }

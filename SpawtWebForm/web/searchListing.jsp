@@ -103,6 +103,7 @@
                  //now fill table with database stuff
                 //make each table entry clickable to detailed page
                 var tableRef = document.getElementById('resultTable');
+                tableRef.innerHTML = "";
                 //console.log(JSON.stringify(arrayOfListings));
                 // Insert a row in the table at the last row
                 var parsedJSON = JSON.parse(arrayOfListings);

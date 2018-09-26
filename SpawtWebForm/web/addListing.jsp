@@ -142,17 +142,19 @@
             </fieldset>
             Files: <input type="file" id="files" name="files" multiple accept="image/*"><br/>
             <div id="selectedFiles"></div>
+            
+            <div id="selDiv"></div>
 
             <input type="submit" value="submit Listing" name="submitListingButton"/>
             <% //turn data inputted into json text and then.....(ask john what to 
             //do after that%>
         </form>
         
-        
         <pre id="errors"></pre>
         
         <script>
-            var selDiv = "";
+            
+            var filesArr;
             document.addEventListener("DOMContentLoaded", init, false);
             
             function init() {
@@ -164,17 +166,29 @@
 		if(!e.target.files || !window.FileReader) return;
 		selDiv.innerHTML = "";
 		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
+		filesArr = Array.prototype.slice.call(files);
 		filesArr.forEach(function(f) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
-				var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
-				selDiv.innerHTML += html;				
+                                var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
+                                document.getElementById("selDiv").innerHTML += html;
+                                document.getElementById("selDiv").innerHTML += "<select id= \"" + f.name +"\">"
+                                +"<option value=\"Bathroom\"Bathroom></option>"
+                                +"<option value=\"Livingroom\">Livingroom</option>"
+                                +"<option value=\"Bedroom\">Bedroom</option>"
+                                +"<option value=\"Kitchen\">Kitchen</option>"
+                                +"<option value=\"Outside\">Outside</option>"
+                                +"<option value=\"Other\">Other</option>"
+                                +"</select>" 
+                                + "<br></br>";
 			}
 			reader.readAsDataURL(f); 
+                        console.log(f.name);
 		});
             } 
-           function makeJson(form){
+            
+            
+            function makeJson(form){
                 
                 
                 var jsonAmenities= {
@@ -223,7 +237,6 @@
                     "Amenities": amenities
                 };
                 //if(!form.elements[insurance].checked) jsonListAndAmen[Insurance]= "N";
-                
                 var jSONListing = JSON.stringify(jsonListAndAmen);
                 //document.getElementById('errors').innerHTML=jSONListing;
                 
@@ -248,6 +261,45 @@
                     }
                 } 
                 httpRequest.send();
+                
+                
+                var didntLoad = 0;
+                    //now send images to database---
+                filesArr.forEach(function(f){
+                   var imageRequest = new XMLHttpRequest();
+                   var reader = new FileReader();
+                   var image;
+                    reader.onload = function (e) {
+                        image =  e.target.result;				
+                    }
+                    reader.readAsDataURL(f);
+                    console.log(XMLHttpRequest.responseText);
+                    var url = 'http://localhost:8080/SpawtService/addimage/'+ image+'/'+ XMLHttpRequest.responseText+"/"+ document.getElementById(f.name).options[document.getElementById(f.name).selectedIndex].value; //tag for specific picture;
+                    console.log(url);
+                    imageRequest.open('POST', url, true);
+                    //Send the proper header information along with the request
+                    imageRequest.setRequestHeader('Content-type', 'multipart/form-data');
+                    console.log("set request header")
+                    imageRequest.onreadystatechange = function() {//Call a function when the state changes.
+                        if(this.readyState == XMLHttpRequest.DONE && imageRequest.status == 200) {
+                            //if string is not an error but an id
+                            if(!(imageRequest.responseText.substring(0,4)=="java")){
+                               // window.location.href = "http://localhost:8080/mainPage.html";
+                               console.log(imageRequest.responseText);
+                            }
+                            //else it is an error
+                            else{
+                                didntLoad= 1;
+                                document.getElementById('errors').innerHTML=imageRequest.responseText;
+                            }
+                        }
+                    } 
+                    imageRequest.send(); 
+                });
+                if(didntLoad==0){
+                    window.location.href = "http://localhost:8080/mainPage.html";
+                }
+                
                 return false;
             }
         </script>

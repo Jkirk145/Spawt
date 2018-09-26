@@ -47,5 +47,6 @@ Contributor(s):
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping class="com.spawt.spawtservice.models.Listing"/>
+    <mapping class="com.spawt.spawtservice.models.Picture"/>
   </session-factory>
 </hibernate-configuration>

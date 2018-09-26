@@ -131,6 +131,10 @@
                         <label for="WiFi">WiFi</label>
                     </div>
             </fieldset>
+            
+            Files: <input type="file" id="files" name="files" multiple accept="image/*"><br/>
+            <div id="selectedFiles"></div>
+            
             <input type="hidden" name="ListingID" id="ListingID" value=""/>
             <input type="submit" value="submit Listing" name="submitListingButton"/>
             <% //turn data inputted into json text and then.....(ask john what to 
@@ -174,6 +178,29 @@
                //console.log(splitAmenities[i]);
                document.getElementById("updatingForm").elements[splitAmenities[i]].checked= "true";  
            }
+           
+           var selDiv = "";
+            document.addEventListener("DOMContentLoaded", init, false);
+            
+            function init() {
+		document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+		selDiv = document.querySelector("#selectedFiles");
+            }
+		
+            function handleFileSelect(e) {
+		if(!e.target.files || !window.FileReader) return;
+		selDiv.innerHTML = "";
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		filesArr.forEach(function(f) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
+				selDiv.innerHTML += html;				
+			}
+			reader.readAsDataURL(f); 
+		});
+            } 
         
            
            function makeJson(form){
