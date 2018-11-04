@@ -1,0 +1,10 @@
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.csprojResolveAssemblyReference.cache
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.csproj.CoreCompileInputs.cache
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.App.xaml.g.cs
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.SpawtPage.xaml.g.cs
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.SpawtView.xaml.g.cs
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.Walkthrough.xaml.g.cs
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.WalkthroughView.xaml.g.cs
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.Views.FirstTimeSearch.xaml.g.cs
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.dll
+/Users/apple/Documents/GitHub/Spawt/Spawt/obj/Debug/Spawt.pdb

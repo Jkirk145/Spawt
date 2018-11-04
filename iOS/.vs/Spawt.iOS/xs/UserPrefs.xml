@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{9E421BB0-9B59-4FFB-BE60-0D327C2C594E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LaunchScreen.storyboard">
+    <Files>
+      <File FileName="LaunchScreen.storyboard" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.ItemProperties.Spawt.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.8BBF7896-C0AC-4B2E-9524-9F0AAA8B9FE9" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
